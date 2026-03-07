@@ -6,33 +6,57 @@ const Pricing = () => {
   const plans = [
     {
       name: "Basic",
-      price: "₹7,999",
-      desc: "Perfect for small shops that need a simple professional website.",
-      features: ["3 page website", "Mobile responsive", "Contact form", "Basic SEO"],
+      price: "₹4,999",
+      desc: "Perfect for a simple, professional single-page presence.",
+      features: [
+        "Landing Page", 
+        "Mobile responsive", 
+        "Services, Contact, Location", 
+        "Basic SEO, Optimised",
+        "3-5 Days Delivery"
+      ],
       buttonText: "Get Started",
       highlight: false
     },
     {
       name: "Professional",
-      price: "₹14,999",
-      desc: "Best for growing businesses needing a strong presence.",
-      features: ["Up to 6 pages", "Custom design", "Animations", "Mobile optimization", "SEO ready"],
+      price: "₹12,999",
+      desc: "Best for growing businesses needing a strong multi-page presence.",
+      features: [
+        "Up to 6-7 pages", 
+        "Premium Design", 
+        "Whatsapp Integration", 
+        "Mobile responsive & SEO",
+        "Fast Delivery"
+      ],
       buttonText: "Most Popular",
       highlight: true
     },
     {
       name: "Enterprise",
-      price: "₹29,999",
-      desc: "Ideal for businesses that want a strong online presence.",
-      features: ["Unlimited pages", "Advanced animations", "Performance optimization", "Premium design"],
+      price: "₹24,999",
+      desc: "Ideal for businesses that want a fully loaded digital experience.",
+      features: [
+        "Everything in Professional",
+        "Chatbot Integration", 
+        "CMS setup for Blogs", 
+        "Advanced SEO & Analytics",
+        "Priority Support"
+      ],
       buttonText: "Elevate Brand",
       highlight: false
     },
     {
       name: "Custom",
-      price: "Let's Talk",
-      desc: "For businesses that need a tailored solution with special features.",
-      features: ["Fully custom website", "Advanced integrations", "Special features", "Priority support"],
+      price: "Custom",
+      desc: "Send a request and our team will contact you for further enquiries.",
+      features: [
+        "Fully tailored architecture", 
+        "Advanced Integrations", 
+        "Dedicated Team", 
+        "E-commerce capabilities",
+        "Ongoing Maintenance"
+      ],
       buttonText: "Request Quote",
       highlight: false
     }
@@ -45,8 +69,11 @@ const Pricing = () => {
           <h1 className="text-5xl md:text-7xl font-heading font-medium tracking-tight mb-8">
             Simple, Transparent Pricing
           </h1>
-          <p className="text-xl md:text-2xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-500 font-light max-w-2xl mx-auto leading-relaxed mb-4">
             Premium quality websites without the enterprise price tag.
+          </p>
+          <p className="text-sm font-medium text-accent">
+            * Domain (Charges applicable) + Add-ons apply to all plans.
           </p>
         </FadeUp>
       </section>
