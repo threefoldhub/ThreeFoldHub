@@ -1,7 +1,35 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const faqs = [
+    {
+      q: "How long does a website take?",
+      a: "Typically 1 to 2 weeks depending on the complexity of the project."
+    },
+    {
+      q: "Do you provide domains?",
+      a: "Yes, we can help you secure the right domain and reliable hosting."
+    },
+    {
+      q: "What is your pricing structure?",
+      a: "We offer clear, one-time tier pricing based on your project scope."
+    },
+    {
+      q: "Can you redesign an old site?",
+      a: "Absolutely! We specialize in modernizing outdated legacy websites."
+    }
+  ];
+
+  const handleToggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
 
   return (
     <footer className="bg-white border-t border-black/5 pt-20 pb-10">
@@ -37,12 +65,39 @@ const Footer = () => {
 
           <div>
             <h4 className="font-heading font-medium text-lg mb-6">FAQs</h4>
-            <ul className="flex flex-col gap-4 text-sm text-gray-500">
-              <li><Link to="/contact" className="hover:text-primary transition-colors leading-relaxed block">How long does a website take to build?</Link></li>
-              <li><Link to="/contact" className="hover:text-primary transition-colors leading-relaxed block">Do you provide domains?</Link></li>
-              <li><Link to="/pricing" className="hover:text-primary transition-colors leading-relaxed block">What is your pricing structure?</Link></li>
-              <li><Link to="/contact" className="hover:text-primary transition-colors leading-relaxed block">Can you redesign an old site?</Link></li>
-            </ul>
+            <div className="flex flex-col gap-3">
+              {faqs.map((faq, index) => (
+                <div key={index} className="border-b border-black/5 last:border-0 pb-2 border-dashed">
+                  <button 
+                    onClick={() => handleToggleFaq(index)}
+                    className="flex justify-between items-center w-full text-left text-sm text-gray-600 hover:text-primary transition-colors"
+                  >
+                    <span className="pr-2">{faq.q}</span>
+                    <motion.div
+                      animate={{ rotate: openFaq === index ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />
+                    </motion.div>
+                  </button>
+                  <AnimatePresence>
+                    {openFaq === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+                          {faq.a}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>
