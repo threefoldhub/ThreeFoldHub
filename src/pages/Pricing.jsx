@@ -88,14 +88,23 @@ const Pricing = () => {
     const form = e.target;
     // Inject the selected plan into the form data before submission
     const formData = new FormData(form);
-    formData.append("Selected Plan", selectedPlan.name);
-    formData.append("Plan Price", selectedPlan.price);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      selected_plan: selectedPlan.name,
+      plan_price: selectedPlan.price,
+      project_requirements: formData.get("project_requirements") || "N/A",
+      _subject: `New Plan Request: ${selectedPlan?.name}`,
+      _captcha: "false"
+    };
     
     try {
       const response = await fetch("https://formsubmit.co/ajax/hubthreefold@gmail.com", {
         method: "POST",
-        body: formData,
+        body: JSON.stringify(data),
         headers: {
+            'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
       });
@@ -218,6 +227,8 @@ const Pricing = () => {
                         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                             {/* Honeypot */}
                             <input type="text" name="_honey" style={{ display: 'none' }} />
+                            {/* Disable captcha */}
+                            <input type="hidden" name="_captcha" value="false" />
                             {/* Keep subject pristine */}
                             <input type="hidden" name="_subject" value={`New Plan Request: ${selectedPlan?.name}`} />
                             

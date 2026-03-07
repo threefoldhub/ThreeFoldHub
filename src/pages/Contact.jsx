@@ -15,12 +15,21 @@ const Contact = () => {
     
     const form = e.target;
     const formData = new FormData(form);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message"),
+      _subject: "New Contact Message",
+      _captcha: "false"
+    };
     
     try {
       const response = await fetch("https://formsubmit.co/ajax/hubthreefold@gmail.com", {
         method: "POST",
-        body: formData,
+        body: JSON.stringify(data),
         headers: {
+            'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
       });
