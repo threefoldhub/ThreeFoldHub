@@ -1,14 +1,15 @@
 import { useRef } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Monitor, Smartphone, Zap } from 'lucide-react';
 import FadeUp from '../components/ui/FadeUp';
 import Button from '../components/ui/Button';
 import { ShaderAnimation } from '../components/ui/ShaderAnimation';
+import { VelocityText } from '../components/ui/VelocityText';
 
 const Home = () => {
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const mockupY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   
   const services = [
@@ -55,15 +56,17 @@ const Home = () => {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Immersive Shader Background */}
         <div className="absolute inset-0 z-0">
           <ShaderAnimation />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg-base via-transparent to-bg-base opacity-60 dark:opacity-80 transition-opacity duration-700" />
-          <div className="absolute inset-0 bg-bg-base/20 transition-colors duration-700" />
+          {/* Subtle gradient overlays for depth and readability */}
+          <div className="absolute inset-0 bg-linear-to-b from-bg-base via-transparent via-40% to-bg-base/20 opacity-70 dark:opacity-90 transition-opacity duration-700" />
+          <div className="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-bg-base to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-bg-base/10 transition-colors duration-700" />
         </div>
 
-        <div className="container mx-auto px-6 max-w-7xl relative z-10 pt-28 pb-20 flex flex-col md:flex-row items-center gap-12">
+        <div className="container mx-auto px-6 max-w-7xl relative z-10 pt-32 pb-12 flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2 max-w-2xl">
             <FadeUp>
               <h1 className="text-6xl md:text-8xl font-heading font-semibold tracking-tight leading-[1.05] text-balance mb-8">
@@ -78,7 +81,7 @@ const Home = () => {
             </FadeUp>
             
             <FadeUp delay={0.2}>
-              <p className="text-xl md:text-2xl text-primary/60 font-light max-w-2xl leading-relaxed mb-12 text-balance">
+              <p className="text-xl md:text-2xl text-primary/60 font-light max-w-2xl leading-relaxed mb-8 text-balance">
                 Your business deserves a digital experience as premium as the services you offer. We build stunning, high-performance websites that capture attention and drive real growth.
               </p>
             </FadeUp>
@@ -101,7 +104,7 @@ const Home = () => {
                   className="absolute inset-0 right-12 bottom-12 bg-surface rounded-3xl overflow-hidden border border-primary/5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] flex flex-col"
                 >
                   {/* Browser Header / Frame */}
-                  <div className="h-12 bg-[#f8f7f4] border-b border-primary/5 flex items-center px-4 gap-2 shrink-0">
+                  <div className="h-12 bg-[#f8f7f4] border-b border-primary/5 flex items-center px-4 gap-2 shrink-0" >
                     <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                     <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
                     <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
@@ -204,6 +207,16 @@ const Home = () => {
             </FadeUp>
           </div>
         </div>
+      </section>
+
+      {/* Velocity Scrolling Text Section */}
+      <section className="py-20 md:py-32 bg-bg-base border-y border-primary/5 overflow-hidden">
+        <VelocityText className="font-heading font-medium text-4xl md:text-8xl tracking-tighter uppercase text-primary/10">
+          Transforming Local Businesses &bull; Modernizing Web Presence &bull; Driving Real Results &bull; 
+        </VelocityText>
+        <VelocityText baseVelocity={-1.5} className="font-heading font-medium text-4xl md:text-8xl tracking-tighter uppercase mt-4">
+          Better Design &bull; Better Code &bull; Better Growth &bull; The ThreeFold Hub &bull;
+        </VelocityText>
       </section>
 
       {/* What We Offer */}
